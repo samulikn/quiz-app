@@ -1,39 +1,83 @@
-import type { ReactNode } from "react";
-import { type QuizDataType } from "./Content";
+import { type ReactNode } from "react";
+import { useNavigate } from "react-router-dom";
+import useQuiz from "../hooks/useQuiz";
+import useScore from "../hooks/useScore";
+import type { QuestionType } from "../context/QuizContext";
+import { icon, bgColor } from "../functions/icon";
 
-const icons = import.meta.glob("../assets/images/*.svg", {
-    eager: true,
-    import: "default",
-  }) as Record<string, string>;
-
-const bgColors: Record<string, string> = {
-    "HTML": "bg-orange-50",
-    "CSS": "bg-green-100",
-    "JavaScript": "bg-blue-50",
-    "Accessibility": "bg-purple-100"
-}
-
-export type SubjectItemType = {
-  subject: QuizDataType;
+export type QuizDataType = {
+  title: string;
+  icon: string;
+  questions: QuestionType[];
 };
 
-function SubjectItem({ subject }: SubjectItemType): ReactNode {
-    const icon = subject.title === "JavaScript" ? icons["../assets/images/icon-js.svg"] : icons[`../assets/images/icon-${subject.title.toLowerCase()}.svg`];
-    const bgColor = bgColors[subject.title] ?? "bg-grey-50";
-    const classes: string = [bgColor, "w-10 h-10 p-1.5 rounded-xl sm:w-14 sm:h-14"].join(" ");
+export let cache: QuizDataType[] | null = null;
 
-    function getQuestions () {
-        console.log(subject);
-        const subjectData = subject.questions;
-        console.log(subjectData)
+export type SubjectItemProps = {
+  subject: string;
+};
+
+function SubjectItem({ subject }: SubjectItemProps): ReactNode {
+  const { state, dispatch } = useScore();
+  const { setQuestions } = useQuiz();
+  const storedSubject = state.subject;
+
+  const navigate = useNavigate();
+
+  const iconSrc = icon(subject);
+  const iconBgColor = bgColor(subject);
+
+  async function fetchQuizData(): Promise<QuizDataType[]> {
+    if (cache) return cache;
+
+    const response = await fetch("../src/data/data.json");
+    const data = await response.json();
+    cache = data.quizzes;
+    return cache!;
+  }
+
+  const getQuestions = async (subject: string) => {
+    if (storedSubject && storedSubject !== subject) { dispatch({ type: "RESET" }) };
+
+    try {
+      await fetchQuizData();
+      const questionsBySubject = cache?.find((item) => item.title === subject);
+
+      if (!questionsBySubject) {
+        console.error(`No data found for: ${subject}`);
+        return;
+      }
+
+      if (questionsBySubject.title) {
+        dispatch({ type: "SET_SUBJECT", payload: questionsBySubject.title });
+        dispatch({
+          type: "SET_COUNTQUESTION",
+          payload: questionsBySubject.questions.length,
+        });
+        setQuestions(questionsBySubject.questions);
+      }
+
+      navigate(`/quiz/${subject}`);
+    } catch (err) {
+      `Coudn't load data ${err}.`;
     }
+  };
 
   return (
-    <button type="button" onClick={() => {getQuestions()}}
-            className="w-full p-4 flex gap-4 items-center text-lg font-medium bg-white dark:bg-blue-850 rounded-xl shadow-lg
-                           sm:text-2xl sm:gap-8 sm:rounded-3xl lg:p-6">
-      <img src={icon} alt={subject.title} className={classes} />
-      {subject.title}
+    <button
+      type="button"
+      onClick={() => {
+        getQuestions(`${subject}`);
+      }}
+      className="w-full p-4 flex gap-4 items-center text-lg font-medium bg-white dark:bg-blue-850 rounded-xl shadow-lg
+                           sm:text-2xl sm:gap-8 sm:rounded-3xl lg:p-6"
+    >
+      <img
+        src={iconSrc}
+        alt={subject}
+        className={`${iconBgColor} w-10 h-10 p-1.5 rounded-xl sm:w-14 sm:h-14`}
+      />
+      {subject}
     </button>
   );
 }

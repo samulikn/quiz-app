@@ -7,10 +7,6 @@ type ThemeContextType = {
   toggleTheme: () => void;
 };
 
-// const initThemeState = (localStorage.theme === "dark" ||
-//       (!("theme" in localStorage) &&
-//         window.matchMedia("(prefers-color-scheme: dark)").matches)) ? "dark" : "light";
-
 const ThemeContext = createContext<ThemeContextType | null>(null);
 
 type ChildrenType = { children?: ReactElement | ReactElement[] };

@@ -5,9 +5,11 @@
 
 @theme {
   --font-rubik: "Rubik", sans-serif;
-  --text-2xl: 28px;
+  --text-3xl: 28px;
   --text-5xl: 40px;
   --text-6xl: 64px;
+  --text-8xl: 88px;
+  --text-12xl: 144px;
   /* --leading-10: 42px; */
 
   --color-white: #FFFFFF;
@@ -28,4 +30,7 @@
   --color-orange-400: #FF7E35;
   --color-orange-50: #FFF5ED;
   --color-red-500: #EE5454;
+}
+
+@layer components {
 }
