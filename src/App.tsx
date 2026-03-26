@@ -1,35 +1,32 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Routes, Route } from "react-router-dom";
+import Heading from "./components/Heading";
+import { ThemeContextProvider } from "./context/ThemeContext";
+import Content from "./components/Content";
+import QuestionContainer from "./components/QuestionContainer";
+import { QuizProvider } from "./context/QuizContext";
+import Score from "./components/Score";
+import { ScoreProvider } from "./context/ScoreContext";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <main
+      className="w-full flex flex-col text-blue-900 dark:text-white sm:w-11/12 sm:mx-auto sm:pt-8
+                      xl:w-10/12"
+    >
+      <ThemeContextProvider>
+        <ScoreProvider>
+          <Heading />
+          <QuizProvider>
+            <Routes>
+              <Route path="/" element={<Content />} />
+              <Route path="/quiz/:subject" element={<QuestionContainer />} />
+              <Route path="/result" element={<Score />} />
+            </Routes>
+          </QuizProvider>
+        </ScoreProvider>
+      </ThemeContextProvider>
+    </main>
+  );
 }
 
-export default App
+export default App;
