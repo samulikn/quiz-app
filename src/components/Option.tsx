@@ -1,5 +1,4 @@
 import { type ReactNode } from "react";
-// import type { OptionType } from "../context/QuizContext";
 import iconCorrect from "../assets/images/icon-correct.svg";
 import iconIncorrect from "../assets/images/icon-incorrect.svg";
 
@@ -12,6 +11,12 @@ type OptionTypeProps = {
   onSelect: () => void;
 };
 
+type OptionClassType = {
+  ring: string;
+  bg: string;
+  text: string;
+};
+
 function Option({
   letter,
   option,
@@ -20,7 +25,7 @@ function Option({
   isSubmitted,
   onSelect,
 }: OptionTypeProps): ReactNode {
-  const getOptionClass = (optionValue: string) => {
+  const getOptionClass = (optionValue: string): OptionClassType => {
     if (!answer) {
       return selected === optionValue
         ? { ring: "ring-purple-600", bg: "bg-purple-600", text: "text-white" }

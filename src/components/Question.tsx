@@ -10,12 +10,12 @@ function Question(): ReactNode {
   const question = questions[currentIndex].question;
   const currentQuestion: number = currentIndex + 1;
 
-  const fill: number = (currentQuestion * 100) / countQuestion;
+  const fill: number = currentQuestion * 100 / countQuestion;
 
   return (
     <div className="flex flex-col xl:pt-1">
       <p className="mb-3 text-sm/6 italic sm:mb-6 sm:text-xl/6">
-        Question {currentQuestion} of 10
+        Question {currentQuestion} of {countQuestion}
       </p>
       <h3 className="text-xl leading-[1.2] font-medium sm:text-4xl">
         {question}

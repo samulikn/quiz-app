@@ -4,7 +4,7 @@ import IconSunLight from "../../src/assets/images/icon-sun-light.svg";
 import IconMoonDark from "../../src/assets/images/icon-moon-dark.svg";
 import IconMoonLight from "../../src/assets/images/icon-moon-light.svg";
 import { UseThemeContext } from "../hooks/useTheme";
-import { icon, bgColor } from "../functions/icon";
+import { icon, bgColor } from "../utils/subjectStyles";
 import useScore from "../hooks/useScore";
 
 const Heading = (): ReactNode => {
@@ -26,7 +26,11 @@ const Heading = (): ReactNode => {
         {!subject ? (
           <></>
         ) : (
-          <img src={iconSrc} alt={subject} className={`${iconBgColor} w-10 h-10 p-1.5 rounded-xl sm:w-14 sm:h-14`} />
+          <img
+            src={iconSrc}
+            alt={subject}
+            className={`${iconBgColor} w-10 h-10 p-1.5 rounded-xl sm:w-14 sm:h-14`}
+          />
         )}
         <h2 className="text-lg font-medium sm:text-3xl">{subject}</h2>
       </div>

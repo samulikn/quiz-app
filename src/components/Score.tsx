@@ -1,19 +1,22 @@
 import { useNavigate } from "react-router-dom";
-import { icon, bgColor } from "../functions/icon";
+import { icon, bgColor } from "../utils/subjectStyles";
 import useScore from "../hooks/useScore";
+import useQuiz from "../hooks/useQuiz";
 
 function Score() {
   const navigate = useNavigate();
   const { state, dispatch } = useScore();
   const { subject, countQuestion, score } = state;
+  const { setQuestions } = useQuiz();
 
   const iconSrc = icon(subject);
   const iconBgColor = bgColor(subject);
 
-  const handleReset = (e: any) => {
+  const handleReset = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
     dispatch({ type: "RESET" });
+    setQuestions([]);
     navigate("/");
   };
 
@@ -34,10 +37,10 @@ function Score() {
             <p className="text-lg font-medium sm:text-3xl">{subject}</p>
           </div>
           <div className="flex flex-col gap-4">
-          <p className="font-medium text-8xl sm:text-12xl">{score}</p>
-          <p className="text-grey-500 text-lg font-medium sm:text-2xl/6 xl:font-normal dark:text-blue-300">
-            out of {countQuestion}
-          </p>
+            <p className="font-medium text-8xl sm:text-12xl">{score}</p>
+            <p className="text-grey-500 text-lg font-medium sm:text-2xl/6 xl:font-normal dark:text-blue-300">
+              out of {countQuestion}
+            </p>
           </div>
         </article>
         <button

@@ -4,7 +4,6 @@ import { type ReactNode } from "react";
 const subjects: string[] = ["HTML", "CSS", "JavaScript", "Accessibility"];
 
 function Content(): ReactNode {
-
   return (
     <div className="px-6 py-8 flex flex-col gap-9 xl:flex-row sm:gap-16 xl:gap-35 sm:px-8 sm:py-8 xl:px-5">
       <div className="flex flex-col gap-4 text-nowrap xl:gap-13">

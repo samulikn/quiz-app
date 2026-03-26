@@ -18,7 +18,7 @@ function OptionList(): ReactNode {
 
   const { state, dispatch } = useScore();
   const { questions } = useQuiz();
-  const { currentIndex, countQuestion } = state;
+  const { currentIndex, countQuestion, isFinished } = state;
   const options = questions[currentIndex].options;
   const answer = questions[currentIndex].answer;
   const navigate = useNavigate();
@@ -32,8 +32,12 @@ function OptionList(): ReactNode {
     setIsError(false);
   };
 
-  const handleSubmitAnswer = (e: any) => {
+  const handleSubmitAnswer = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+
+    if (isFinished) {
+      return;
+    }
 
     if (!selected) {
       setIsError(true);
@@ -48,7 +52,7 @@ function OptionList(): ReactNode {
     setIsSubmitted(true);
   };
 
-  const handleNextQuestion = (e: any) => {
+  const handleNextQuestion = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
     setSelected(null);
@@ -94,7 +98,7 @@ function OptionList(): ReactNode {
             onClick={handleNextQuestion}
             className="p-4 bg-purple-500 rounded-xl text-white shadow-md sm:p-8 sm:rounded-3xl"
           >
-            Next Question
+            {isFinished ? "Results" : "Next Question"}
           </button>
         ) : (
           <button

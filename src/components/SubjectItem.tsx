@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 import useQuiz from "../hooks/useQuiz";
 import useScore from "../hooks/useScore";
 import type { QuestionType } from "../context/QuizContext";
-import { icon, bgColor } from "../functions/icon";
+import { icon, bgColor } from "../utils/subjectStyles";
+import { loadQuestions } from "../utils/loadQuestions";
 
 export type QuizDataType = {
   title: string;
@@ -27,40 +28,23 @@ function SubjectItem({ subject }: SubjectItemProps): ReactNode {
   const iconSrc = icon(subject);
   const iconBgColor = bgColor(subject);
 
-  async function fetchQuizData(): Promise<QuizDataType[]> {
-    if (cache) return cache;
-
-    const response = await fetch("../src/data/data.json");
-    const data = await response.json();
-    cache = data.quizzes;
-    return cache!;
-  }
-
   const getQuestions = async (subject: string) => {
-    if (storedSubject && storedSubject !== subject) { dispatch({ type: "RESET" }) };
-
-    try {
-      await fetchQuizData();
-      const questionsBySubject = cache?.find((item) => item.title === subject);
-
-      if (!questionsBySubject) {
-        console.error(`No data found for: ${subject}`);
-        return;
-      }
-
-      if (questionsBySubject.title) {
-        dispatch({ type: "SET_SUBJECT", payload: questionsBySubject.title });
-        dispatch({
-          type: "SET_COUNTQUESTION",
-          payload: questionsBySubject.questions.length,
-        });
-        setQuestions(questionsBySubject.questions);
-      }
-
-      navigate(`/quiz/${subject}`);
-    } catch (err) {
-      `Coudn't load data ${err}.`;
+    if (storedSubject && storedSubject !== subject) {
+      dispatch({ type: "RESET" });
     }
+
+    const data = loadQuestions(subject);
+
+    if (data) {
+      dispatch({ type: "SET_SUBJECT", payload: subject });
+      dispatch({
+        type: "SET_COUNTQUESTION",
+        payload: data.length,
+      });
+      setQuestions(data);
+    }
+
+    navigate(`/quiz/${subject}`);
   };
 
   return (

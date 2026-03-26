@@ -1,6 +1,5 @@
-import { createContext, useEffect, useState, type ReactNode } from "react";
-import { type QuizDataType } from "../functions/api";
-import data from "../data/data.json";
+import { createContext, useState, type ReactNode } from "react";
+import { loadQuestions } from "../utils/loadQuestions";
 
 export type OptionType = string;
 
@@ -10,7 +9,21 @@ export type QuestionType = {
   answer: string;
 };
 
-const initQuestionsState: QuestionType[] = [];
+const initQuestionsState = (): QuestionType[] => {
+  try {
+    const stored = localStorage.getItem("quizState");
+    if (!stored) return [];
+
+    const { subject } = JSON.parse(stored);
+    const filteredBySubject: QuestionType[] = loadQuestions(subject);
+
+    return filteredBySubject;
+    
+  } catch(err) {
+    console.error(`Loading data wasn't success. ${err}`);
+    return [];
+  }
+};
 
 export type UseQuizContextType = {
   questions: QuestionType[];
@@ -29,20 +42,6 @@ type ChildrenType = { children?: ReactNode };
 export const QuizProvider = ({ children }: ChildrenType) => {
   const [questions, setQuestions] =
     useState<QuestionType[]>(initQuestionsState);
-  const stored = localStorage.getItem("quizState");
-
-  useEffect(() => {
-    if (stored) {
-      const { subject } = JSON.parse(stored);
-      const filteredData = data.quizzes.find(
-        (item: QuizDataType) => item.title === subject,
-      );
-      const questionsArray = filteredData
-        ? filteredData.questions
-        : initQuestionsState;
-      setQuestions(questionsArray);
-    }
-  }, []);
 
   return (
     <QuizContext.Provider
