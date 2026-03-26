@@ -21,10 +21,10 @@ function Score() {
   };
 
   return (
-    <div className="pt-8 px-6 flex flex-col mx-auto gap-10 sm:w-11/12 sm:px-0 sm:gap-16 xl:w-full xl:flex-row xl:gap-36 xl:justify-between">
-      <div className="text-5xl sm:text-6xl">
+    <div className="pt-8 px-6 flex flex-col mx-auto gap-10 sm:w-11/12 sm:px-0 sm:gap-16 xl:w-full xl:flex-row xl:gap-32 xl:justify-between">
+      <div className="text-5xl sm:text-6xl xl:pl-4">
         <h2 className="mb-2 font-light">Quiz completed</h2>
-        <h3 className="font-medium">Your scored...</h3>
+        <h3 className="font-medium">You scored...</h3>
       </div>
       <div className="xl:basis-1/2 xl:shrink-0 xl:px-4">
         <article className="mb-4 p-8 bg-white rounded-2xl flex flex-col gap-4 items-center sm:mb-8 sm:p-12 sm:gap-10 sm:rounded-3xl dark:bg-blue-850">
