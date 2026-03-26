@@ -34,7 +34,7 @@ const scoreReducer = (
     case "SET_COUNTQUESTION":
       return { ...state, countQuestion: action.payload };
     case "NEXT_QUESTION":
-      const newIndex: number = state.currentIndex + 1 % state.countQuestion;
+      const newIndex: number = state.currentIndex + (1 % state.countQuestion);
       return { ...state, currentIndex: newIndex };
     case "INCREMENT_SCORE":
       const newScore: number = state.score + 1;
@@ -67,7 +67,7 @@ export const ScoreProvider = ({ children }: ChildrenType) => {
   );
 
   useEffect(() => {
-    localStorage.setItem("quizState", JSON.stringify(state));
+    if (state.subject) localStorage.setItem("quizState", JSON.stringify(state));
   }, [state]);
 
   return (
