@@ -24,7 +24,7 @@ function OptionList(): ReactNode {
   const navigate = useNavigate();
 
   const selectedAnswer = (option: string) => {
-    if (isSubmitted) {
+    if (isSubmitted || isFinished) {
       return;
     }
 
@@ -44,6 +44,10 @@ function OptionList(): ReactNode {
       return;
     }
 
+    if (currentIndex + 1 === countQuestion) {
+      dispatch({ type: "FINISH_QUIZ" });
+    }
+
     setCorrectAnswer(answer);
     if (selected === answer) {
       dispatch({ type: "INCREMENT_SCORE" });
@@ -59,8 +63,7 @@ function OptionList(): ReactNode {
     setCorrectAnswer(null);
     setIsSubmitted(false);
 
-    if (currentIndex + 1 === countQuestion) {
-      dispatch({ type: "FINISH_QUIZ" });
+    if (isFinished) {
       navigate("/result");
     } else {
       dispatch({ type: "NEXT_QUESTION" });
