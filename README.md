@@ -37,7 +37,7 @@ Users should be able to:
 ### Links
 
 - Solution URL: [GitHub repository](https://github.com/samulikn/quiz-app)
-- Live Site URL: [Live site]()
+- Live Site URL: [Live site](https://samulikn.github.io/quiz-app)
 
 ## My process
 
@@ -54,7 +54,11 @@ Users should be able to:
 
 ### What I learned
 
-It was a good to practice more about contexts, 
+I learned how to set up and develop a project using React with TypeScript, Vite, and Tailwind CSS and deploy it to gitHub pages. I practiced applying styles conditionally based on component state. For example, I used template literals to dynamically assign Tailwind classes:
+
+```Tailwind CSS
+className={`p-4 bg-white ${styles.ring} ...`}
+```
 
 ## Author
 
