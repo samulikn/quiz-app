@@ -1,12 +1,6 @@
 import type { QuestionType } from "../context/QuizContext";
 import data from "../data/data.json";
 
-export type QuizDataType = {
-  title: string;
-  icon: string;
-  questions: QuestionType[];
-};
-
 const loadQuestions = (subject: string): QuestionType[] => {
   try {
     const questionsBySubject = data?.quizzes.find(
