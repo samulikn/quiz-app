@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap'); */
 @import "tailwindcss";
 
 @custom-variant dark (&:where(.dark, .dark *));
@@ -9,8 +9,7 @@
   --text-5xl: 40px;
   --text-6xl: 64px;
   --text-8xl: 88px;
-  --text-12xl: 144px;
-  /* --leading-10: 42px; */
+  --text-10xl: 144px;
 
   --color-white: #FFFFFF;
   --color-black: #000000;
@@ -32,5 +31,8 @@
   --color-red-500: #EE5454;
 }
 
-@layer components {
+@layer base {
+  body {
+    font-family: var(--font-rubik);
+  }
 }

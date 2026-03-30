@@ -13,7 +13,8 @@ function QuestionContainer(): ReactNode {
     return <div className="m-4">Loading...</div>;
   }
   return (
-    <div className="w-full pt-8 px-6 flex flex-col gap-10 sm:pt-11 sm:px-8 xl:pt-8 xl:flex-row xl:pl-5 xl:gap-28">
+    <div className="w-full pt-8 px-6 flex flex-col gap-10 
+                    sm:px-8 sm:pt-12 xl:flex-row xl:pt-8 xl:px-5 xl:gap-29">
       <Question />
       <OptionList key={currentIndex} />
     </div>

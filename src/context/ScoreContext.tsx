@@ -34,7 +34,7 @@ const scoreReducer = (
     case "SET_COUNTQUESTION":
       return { ...state, countQuestion: action.payload };
     case "NEXT_QUESTION":
-      const newIndex: number = state.currentIndex + (1 % state.countQuestion);
+      const newIndex: number = state.currentIndex + 1;
       return { ...state, currentIndex: newIndex };
     case "INCREMENT_SCORE":
       const newScore: number = state.score + 1;
@@ -45,7 +45,7 @@ const scoreReducer = (
       localStorage.removeItem("quizState");
       return initScoreState;
     default:
-      throw new Error("Underfined reducer action type");
+      throw new Error("Undefined reducer action type.");
   }
 };
 

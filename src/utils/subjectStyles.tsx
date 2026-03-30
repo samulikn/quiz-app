@@ -1,4 +1,4 @@
-const icons = import.meta.glob("../assets/images/icon-*.svg", {
+const icons = import.meta.glob("../../public/images/icon-*.svg", {
   eager: true,
   import: "default",
 }) as Record<string, string>;
@@ -12,8 +12,8 @@ const bgColors: Record<string, string> = {
 
 const icon = (subject: string) => {
   return subject === "JavaScript"
-    ? icons["../assets/images/icon-js.svg"]
-    : icons[`../assets/images/icon-${subject.toLowerCase()}.svg`];
+    ? icons["../../public/images/icon-js.svg"]
+    : icons[`../../public/images/icon-${subject.toLowerCase()}.svg`];
 };
 
 const bgColor = (subject: string) => {

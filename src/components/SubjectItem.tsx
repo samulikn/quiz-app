@@ -54,11 +54,11 @@ function SubjectItem({ subject }: SubjectItemProps): ReactNode {
         getQuestions(`${subject}`);
       }}
       className="w-full p-4 flex gap-4 items-center text-lg font-medium bg-white dark:bg-blue-850 rounded-xl shadow-lg
-                           sm:text-2xl sm:gap-8 sm:rounded-3xl lg:p-6"
+                           sm:text-3xl sm:gap-8 sm:rounded-3xl lg:p-6"
     >
       <img
         src={iconSrc}
-        alt={subject}
+        alt={`icon ${subject}`}
         className={`${iconBgColor} w-10 h-10 p-1.5 rounded-xl sm:w-14 sm:h-14`}
       />
       {subject}

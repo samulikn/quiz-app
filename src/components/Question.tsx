@@ -10,7 +10,8 @@ function Question(): ReactNode {
   const question = questions[currentIndex].question;
   const currentQuestion: number = currentIndex + 1;
 
-  const fill: number = currentQuestion * 100 / countQuestion;
+  const fill: number =
+    countQuestion > 0 ? (currentQuestion * 100) / countQuestion : 0;
 
   return (
     <div className="flex flex-col xl:pt-1">
