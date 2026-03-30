@@ -1,6 +1,6 @@
 import { useState, type ReactNode } from "react";
 import Option from "./Option";
-import iconError from "../assets/images/icon-error.svg";
+import iconError from "../../public/images/icon-error.svg";
 import { useNavigate } from "react-router-dom";
 import useScore from "../hooks/useScore";
 import useQuiz from "../hooks/useQuiz";

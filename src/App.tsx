@@ -6,27 +6,31 @@ import QuestionContainer from "./components/QuestionContainer";
 import { QuizProvider } from "./context/QuizContext";
 import Score from "./components/Score";
 import { ScoreProvider } from "./context/ScoreContext";
+import Layout from "./components/Layout";
 
 function App() {
   return (
     <main
-      className="w-full flex flex-col text-blue-900 dark:text-white sm:w-11/12 sm:mx-auto sm:pt-8
-                      xl:w-10/12"
+      className=""
     >
-      <ThemeContextProvider>
-        <ScoreProvider>
-          <Heading />
-          <QuizProvider>
-            <Routes>
-              <Route path="/" element={<Content />} />
-              <Route path="/quiz/:subject" element={<QuestionContainer />} />
-              <Route path="/result" element={<Score />} />
-            </Routes>
-          </QuizProvider>
-        </ScoreProvider>
-      </ThemeContextProvider>
+      <Layout>
+        <ThemeContextProvider>
+          <ScoreProvider>
+            <Heading />
+            <QuizProvider>
+              <Routes>
+                <Route path="/" element={<Content />} />
+                <Route path="/quiz/:subject" element={<QuestionContainer />} />
+                <Route path="/result" element={<Score />} />
+              </Routes>
+            </QuizProvider>
+          </ScoreProvider>
+        </ThemeContextProvider>
+      </Layout>
     </main>
   );
 }
 
 export default App;
+
+// w-full h-full flex flex-col text-blue-900 dark:text-white sm:w-11/12 sm:mx-auto sm:pt-8 xl:w-10/12

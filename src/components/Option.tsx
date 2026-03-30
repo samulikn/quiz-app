@@ -1,6 +1,6 @@
 import { type ReactNode } from "react";
-import iconCorrect from "../assets/images/icon-correct.svg";
-import iconIncorrect from "../assets/images/icon-incorrect.svg";
+import iconCorrect from "../../public/images/icon-correct.svg";
+import iconIncorrect from "../../public/images/icon-incorrect.svg";
 
 type OptionTypeProps = {
   letter: string;

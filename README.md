@@ -32,7 +32,7 @@ Users should be able to:
 
 ### Screenshot
 
-![Quiz App](src/assets/screenshots/desktop-start-menu-dark.png)
+![Quiz App](src/assets/screenshots/desktop-start-menu-light.png)
 
 ### Links
 
